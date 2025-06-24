@@ -1,0 +1,126 @@
+{
+  "project_info": {
+    "project_number": "115688405848",
+    "project_id": "valley-f2ea1",
+    "storage_bucket": "valley-f2ea1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:115688405848:android:ce65d8fab9ac80ca04432d",
+        "android_client_info": {
+          "package_name": "com.sixamtech.delivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "115688405848-gje7o203k0621jpcdescpetl9i8o4d23.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPAJz4h9oK1bsIf8cmCdxNd8e-RQRHbLU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "115688405848-gje7o203k0621jpcdescpetl9i8o4d23.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "115688405848-1dm2uholdr30381kfrncjiaok9pno3pq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.phlera.dentoflyDeliveryman"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:115688405848:android:0039229e790aed7704432d",
+        "android_client_info": {
+          "package_name": "com.sixamtech.sixvalley"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "115688405848-1kine59pggknovn9gmbvgngt0vfn7sfe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sixamtech.sixvalley",
+            "certificate_hash": "b03d412b09be0834861801c8361fffc21604965c"
+          }
+        },
+        {
+          "client_id": "115688405848-gje7o203k0621jpcdescpetl9i8o4d23.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPAJz4h9oK1bsIf8cmCdxNd8e-RQRHbLU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "115688405848-gje7o203k0621jpcdescpetl9i8o4d23.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "115688405848-1dm2uholdr30381kfrncjiaok9pno3pq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.phlera.dentoflyDeliveryman"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:115688405848:android:3e9fb66356bfdef404432d",
+        "android_client_info": {
+          "package_name": "com.sixamtech.sixvalley.seller"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "115688405848-gje7o203k0621jpcdescpetl9i8o4d23.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPAJz4h9oK1bsIf8cmCdxNd8e-RQRHbLU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "115688405848-gje7o203k0621jpcdescpetl9i8o4d23.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "115688405848-1dm2uholdr30381kfrncjiaok9pno3pq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.phlera.dentoflyDeliveryman"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

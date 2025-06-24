@@ -1,0 +1,2 @@
+D:/dento/User app-20250505T122602Z-001/User app/android/app/.cxx/Debug/54k4b265/arm64-v8a/CMakeFiles/edit_cache.dir
+D:/dento/User app-20250505T122602Z-001/User app/android/app/.cxx/Debug/54k4b265/arm64-v8a/CMakeFiles/rebuild_cache.dir
