@@ -30,6 +30,7 @@ import 'package:flutter_sixvalley_ecommerce/features/address/screens/address_lis
 import 'package:flutter_sixvalley_ecommerce/features/refer_and_earn/screens/refer_and_earn_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/features/setting/screens/settings_screen.dart';
 import 'package:provider/provider.dart';
+import '../../notification/controllers/notification_controller.dart';
 import 'faq_screen_view.dart';
 import 'package:flutter_sixvalley_ecommerce/features/more/widgets/title_button_widget.dart';
 
@@ -49,20 +50,30 @@ class _MoreScreenState extends State<MoreScreen> {
   @override
   void initState() {
     isGuestMode = !Provider.of<AuthController>(context, listen: false).isLoggedIn();
-    if(Provider.of<AuthController>(context, listen: false).isLoggedIn()) {
-      version = Provider.of<SplashController>(context,listen: false).configModel!.softwareVersion ?? 'version';
+
+    if (!isGuestMode) {
+      version = Provider.of<SplashController>(context, listen: false).configModel?.softwareVersion ?? 'version';
       Provider.of<ProfileController>(context, listen: false).getUserInfo(context);
-      if(Provider.of<SplashController>(context,listen: false).configModel!.walletStatus == 1){
-        Provider.of<WalletController>(context, listen: false).getTransactionList(context,1, 'all');
+
+      final splash = Provider.of<SplashController>(context, listen: false);
+      if (splash.configModel?.walletStatus == 1) {
+        Provider.of<WalletController>(context, listen: false).getTransactionList(context, 1, 'all');
       }
-      if(Provider.of<SplashController>(context,listen: false).configModel!.loyaltyPointStatus == 1){
-        Provider.of<LoyaltyPointController>(context, listen: false).getLoyaltyPointList(context,1);
+
+      if (splash.configModel?.loyaltyPointStatus == 1) {
+        Provider.of<LoyaltyPointController>(context, listen: false).getLoyaltyPointList(context, 1);
       }
+
+      /// ✅ FIXED: Pass offset = 1
+      Provider.of<NotificationController>(context, listen: false).getNotificationList(1);
     }
-    singleVendor = Provider.of<SplashController>(context, listen: false).configModel!.businessMode == "single";
+
+    singleVendor = Provider.of<SplashController>(context, listen: false).configModel?.businessMode == "single";
 
     super.initState();
   }
+
+
 
 
   @override

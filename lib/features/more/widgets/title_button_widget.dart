@@ -21,7 +21,7 @@ class MenuButtonWidget extends StatelessWidget {
         trailing: isNotification? Consumer<NotificationController>(
             builder: (context, notificationController, _) {
               return CircleAvatar(radius: 12, backgroundColor: Theme.of(context).primaryColor,
-                child: Text(notificationController.notificationModel?.newNotificationItem.toString() ?? '0',
+                child: Text(notificationController.notificationModel?.totalSize.toString() ?? '0',
                     style: textRegular.copyWith(color: ColorResources.white, fontSize: Dimensions.fontSizeSmall)),
               );}):
 

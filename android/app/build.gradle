@@ -30,7 +30,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace "com.sixamtech.sixvalley"
+    namespace "com.phlera.dentofly"
     compileSdk 35
 
     compileOptions {
@@ -44,7 +44,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.sixamtech.sixvalley"
+        applicationId "com.phlera.dentofly"
         minSdkVersion 23
         targetSdkVersion 35
         versionCode flutterVersionCode.toInteger()
@@ -62,7 +62,10 @@ android {
 
     buildTypes {
         release {
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 }
@@ -81,3 +84,6 @@ dependencies {
     // ✅ Google Sign-In dependency
     implementation 'com.google.android.gms:play-services-auth:21.0.0'
 }
+
+// ✅ Ensure this is at the bottom of the file
+apply plugin: 'com.google.gms.google-services'

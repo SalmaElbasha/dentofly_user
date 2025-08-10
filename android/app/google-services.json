@@ -7,58 +7,22 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:115688405848:android:ce65d8fab9ac80ca04432d",
+        "mobilesdk_app_id": "1:115688405848:android:3514bedbf5bcab5b04432d",
         "android_client_info": {
-          "package_name": "com.sixamtech.delivery"
+          "package_name": "com.phlera.dentofly"
         }
       },
       "oauth_client": [
         {
-          "client_id": "115688405848-gje7o203k0621jpcdescpetl9i8o4d23.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBPAJz4h9oK1bsIf8cmCdxNd8e-RQRHbLU"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "115688405848-gje7o203k0621jpcdescpetl9i8o4d23.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "115688405848-1dm2uholdr30381kfrncjiaok9pno3pq.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.phlera.dentoflyDeliveryman"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:115688405848:android:0039229e790aed7704432d",
-        "android_client_info": {
-          "package_name": "com.sixamtech.sixvalley"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "115688405848-1kine59pggknovn9gmbvgngt0vfn7sfe.apps.googleusercontent.com",
+          "client_id": "115688405848-g9d4011vn2dq9o8cop12pcmuhfhbfp16.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.sixamtech.sixvalley",
-            "certificate_hash": "b03d412b09be0834861801c8361fffc21604965c"
+            "package_name": "com.phlera.dentofly",
+            "certificate_hash": "4bc92c8572f9ac7b1cc6b00b9de309529e02cd14"
           }
         },
         {
-          "client_id": "115688405848-gje7o203k0621jpcdescpetl9i8o4d23.apps.googleusercontent.com",
+          "client_id": "115688405848-dh1hn4upksvf7v1101oiss5d046tutc4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -71,14 +35,14 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "115688405848-gje7o203k0621jpcdescpetl9i8o4d23.apps.googleusercontent.com",
+              "client_id": "115688405848-9qusdovu5hq05t965g4h1gf6hrdk9rqk.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "115688405848-1dm2uholdr30381kfrncjiaok9pno3pq.apps.googleusercontent.com",
+              "client_id": "115688405848-bhktucisghoo17af3tvh2u7rl5v749k2.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.phlera.dentoflyDeliveryman"
+                "bundle_id": "com.phlera.dentofly.seller"
               }
             }
           ]
@@ -87,14 +51,22 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:115688405848:android:3e9fb66356bfdef404432d",
+        "mobilesdk_app_id": "1:115688405848:android:d862c50b38882f9504432d",
         "android_client_info": {
-          "package_name": "com.sixamtech.sixvalley.seller"
+          "package_name": "com.phlera.dentofly.delivery"
         }
       },
       "oauth_client": [
         {
-          "client_id": "115688405848-gje7o203k0621jpcdescpetl9i8o4d23.apps.googleusercontent.com",
+          "client_id": "115688405848-qeredlf17hatkcbbrgrjdg1evipf4or9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.phlera.dentofly.delivery",
+            "certificate_hash": "e506eb8b76ad272bc6b2a56083d5a6637429c441"
+          }
+        },
+        {
+          "client_id": "115688405848-dh1hn4upksvf7v1101oiss5d046tutc4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -107,14 +79,58 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "115688405848-gje7o203k0621jpcdescpetl9i8o4d23.apps.googleusercontent.com",
+              "client_id": "115688405848-9qusdovu5hq05t965g4h1gf6hrdk9rqk.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "115688405848-1dm2uholdr30381kfrncjiaok9pno3pq.apps.googleusercontent.com",
+              "client_id": "115688405848-bhktucisghoo17af3tvh2u7rl5v749k2.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.phlera.dentoflyDeliveryman"
+                "bundle_id": "com.phlera.dentofly.seller"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:115688405848:android:e4cc167dde647f7004432d",
+        "android_client_info": {
+          "package_name": "com.phlera.dentofly.seller"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "115688405848-rlgtag62uuc0oau1dhoe1p5bs929nu9a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.phlera.dentofly.seller",
+            "certificate_hash": "3679d9d8117dfe3be445e597acb42bcab48314ac"
+          }
+        },
+        {
+          "client_id": "115688405848-dh1hn4upksvf7v1101oiss5d046tutc4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPAJz4h9oK1bsIf8cmCdxNd8e-RQRHbLU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "115688405848-9qusdovu5hq05t965g4h1gf6hrdk9rqk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "115688405848-bhktucisghoo17af3tvh2u7rl5v749k2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.phlera.dentofly.seller"
               }
             }
           ]

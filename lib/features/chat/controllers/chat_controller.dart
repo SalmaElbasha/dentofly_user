@@ -2,6 +2,11 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:media_store_plus/media_store_plus.dart';
+import 'package:open_file/open_file.dart';
+import 'dart:io';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_sixvalley_ecommerce/features/chat/domain/models/message_body.dart';
 import 'package:flutter_sixvalley_ecommerce/data/model/api_response.dart';
@@ -461,10 +466,20 @@ class ChatController extends ChangeNotifier {
     }).toList();
   }
 
+
+
+
+
+
+
+
   Future<void> downloadFile(String url, String fileName) async {
     final context = Get.context!;
+    final mediaStore = MediaStore();
 
-    // Notify user that download started
+    // ✅ Set static appFolder before saving
+    MediaStore.appFolder = "DentApp";
+
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Downloading...'),
@@ -473,49 +488,36 @@ class ChatController extends ChangeNotifier {
       ),
     );
 
-    Directory? externalDir;
-
     try {
-      if (Platform.isAndroid) {
-        // Attempt to use public Downloads directory
-        externalDir = Directory('/storage/emulated/0/Download');
+      // Step 1: Create temp file
+      final tempDir = await getTemporaryDirectory();
+      final tempFilePath = '${tempDir.path}/$fileName';
 
-        if (!await externalDir.exists()) {
-          // Fallback to internal storage
-          externalDir = await getExternalStorageDirectory();
-        }
-      } else {
-        // iOS or other platforms
-        externalDir = await getApplicationDocumentsDirectory();
-      }
+      // Step 2: Download using Dio to temp path
+      await Dio().download(url, tempFilePath);
 
-      if (externalDir == null) {
-        throw Exception('Storage directory not found.');
-      }
+      // Step 3: Initialize MediaStore (required)
+      await MediaStore.ensureInitialized();
 
-      final savedDir = externalDir.path;
-
-      // Enqueue the file download
-      final taskId = await FlutterDownloader.enqueue(
-        url: url,
-        savedDir: savedDir,
-        fileName: fileName,
-        showNotification: true,
-        openFileFromNotification: true,
-        saveInPublicStorage: true,
+      // Step 4: Save the file using MediaStore
+      await mediaStore.saveFile(
+        tempFilePath: tempFilePath,
+        dirType: DirType.download,
+        dirName: DirName.download,
+        relativePath: "DentApp/ChatFiles",
       );
 
-      if (taskId != null) {
-        final filePath = "$savedDir/$fileName";
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Download completed!'),
+          backgroundColor: Colors.green,
+          duration: Duration(seconds: 2),
+        ),
+      );
 
-        // Wait a bit to ensure file is saved
-        await Future.delayed(const Duration(seconds: 2));
-
-        // Attempt to open the downloaded file
-        await OpenFile.open(filePath);
-      }
+      await Future.delayed(const Duration(seconds: 1));
+      await OpenFile.open(tempFilePath);
     } catch (e) {
-      // Show error to user
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Failed to download file: $e'),
@@ -525,6 +527,12 @@ class ChatController extends ChangeNotifier {
       );
     }
   }
+
+
+
+
+
+
 
 
   String getChatTimeWithPrevious (Message currentChat, Message? previousChat) {

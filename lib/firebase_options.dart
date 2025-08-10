@@ -42,17 +42,17 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyDoiOgCoCszkhiCy_TAkKoSC1DWM57ejis',
-    appId: '1:115688405848:web:3e2a732dd5f3b49504432d',
+    appId: '1:115688405848:web:19d5f37b587bf76004432d',
     messagingSenderId: '115688405848',
     projectId: 'valley-f2ea1',
     authDomain: 'valley-f2ea1.firebaseapp.com',
     storageBucket: 'valley-f2ea1.firebasestorage.app',
-    measurementId: 'G-THW2HQKJZG',
+    measurementId: 'G-3JDY2WMQYH',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBPAJz4h9oK1bsIf8cmCdxNd8e-RQRHbLU',
-    appId: '1:115688405848:android:0039229e790aed7704432d',
+    appId: '1:115688405848:android:3514bedbf5bcab5b04432d',
     messagingSenderId: '115688405848',
     projectId: 'valley-f2ea1',
     storageBucket: 'valley-f2ea1.firebasestorage.app',
@@ -64,6 +64,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '115688405848',
     projectId: 'valley-f2ea1',
     storageBucket: 'valley-f2ea1.firebasestorage.app',
+    androidClientId: '115688405848-1kine59pggknovn9gmbvgngt0vfn7sfe.apps.googleusercontent.com',
+    iosClientId: '115688405848-94s8qbl02noha8o9eb0g08eeootb06js.apps.googleusercontent.com',
     iosBundleId: 'com.sixamtech.sixValley',
   );
 
@@ -73,6 +75,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '115688405848',
     projectId: 'valley-f2ea1',
     storageBucket: 'valley-f2ea1.firebasestorage.app',
+    androidClientId: '115688405848-1kine59pggknovn9gmbvgngt0vfn7sfe.apps.googleusercontent.com',
+    iosClientId: '115688405848-k7oqhv000qnp5sf0ma97suttuijriob6.apps.googleusercontent.com',
     iosBundleId: 'com.phlera.dentofly',
   );
 

@@ -270,21 +270,6 @@ g.Data? governate;
 
     ApiResponse apiResponse;
 
-    // *** مثال: إضافة serviceFees في بيانات الطلب التي سترسلها ***
-    Map<String, dynamic> orderData = {
-      'address_id': addressID,
-      'coupon_code': couponCode,
-      'coupon_amount': couponAmount,
-      'billing_address_id': billingAddressId,
-      'order_note': orderNote,
-      'transaction_id': transactionId,
-      'payment_note': paymentNote,
-      'id': id,
-      'name': name,
-      'tax': serviceFees ??5,  // هنا نرسل قيمة الرسوم للباكند
-      'input_values': inputValueList,
-      // ... أضف باقي الحقول حسب الحاجة
-    };
 
     try {
       if (isfOffline) {
@@ -300,7 +285,7 @@ g.Data? governate;
         int allowedGovernorateIds = await getGovernates(context);
 // If you want to format it to a string like "2025-05-23"
         String formattedDate = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
-        apiResponse = await checkoutServiceInterface.offlinePaymentPlaceOrder( addressID, couponCode, Provider.of<AddressController>(Get.context!, listen: false).selectedDate,allowedGovernorateIds,"${Provider.of<AddressController>(Get.context!, listen: false).shippingCost}",formattedDate,couponAmount,serviceFees.toString() ,billingAddressId,addressID ,orderNote,
+        apiResponse = await checkoutServiceInterface.offlinePaymentPlaceOrder( addressID, couponCode, Provider.of<AddressController>(Get.context!, listen: false).selectedDate,allowedGovernorateIds,"${Provider.of<CheckoutController>(Get.context!, listen: false).shippingCost}",formattedDate,couponAmount, double.parse((((serviceFees )!/ 100) * (Provider.of<CheckoutController>(context, listen: false).shippingCost ?? 0)).toStringAsFixed(3)).ceil().toString(),billingAddressId,addressID ,orderNote,
             "paid cash on delivery",Provider.of<CartController>(Get.context!, listen: false).cart?.id,"", inputValueList,keyList, inputValueList);
       } else if (wallet) {
         DateTime date;
@@ -316,7 +301,7 @@ g.Data? governate;
 
 // If you want to format it to a string like "2025-05-23"
         String formattedDate = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
-        apiResponse = await checkoutServiceInterface.walletPaymentPlaceOrder (addressID, couponCode, Provider.of<AddressController>(Get.context!, listen: false).selectedDate,allowedGovernorateIds,"${Provider.of<AddressController>(Get.context!, listen: false).shippingCost}",formattedDate,couponAmount,serviceFees.toString() ,billingAddressId,addressID ,orderNote,
+        apiResponse = await checkoutServiceInterface.walletPaymentPlaceOrder (addressID, couponCode, Provider.of<AddressController>(Get.context!, listen: false).selectedDate,allowedGovernorateIds,"${Provider.of<CheckoutController>(Get.context!, listen: false).shippingCost}",formattedDate,couponAmount,double.parse((((serviceFees )!/ 100) * (Provider.of<CheckoutController>(context, listen: false).shippingCost ?? 0)).toStringAsFixed(3)).ceil().toString() ,billingAddressId,addressID ,orderNote,
     "paid by wallet",Provider.of<CartController>(Get.context!, listen: false).cart?.id,"", inputValueList);
       } else {
         DateTime date;
@@ -333,7 +318,7 @@ g.Data? governate;
         String formattedDate = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
 
         apiResponse = await checkoutServiceInterface.cashOnDeliveryPlaceOrder(
-            addressID, couponCode, Provider.of<AddressController>(Get.context!, listen: false).selectedDate,allowedGovernorateIds,"${Provider.of<CheckoutController>(Get.context!, listen: false).shippingCost}",formattedDate,couponAmount,serviceFees.toString() ,billingAddressId,addressID ,orderNote,
+            addressID, couponCode, Provider.of<AddressController>(Get.context!, listen: false).selectedDate,allowedGovernorateIds,"${Provider.of<CheckoutController>(Get.context!, listen: false).shippingCost}",formattedDate,couponAmount,double.parse((((serviceFees )!/ 100) * (Provider.of<CheckoutController>(context, listen: false).shippingCost ?? 0)).toStringAsFixed(3)).ceil().toString() ,billingAddressId,addressID ,orderNote,
             "paid cash on delivery",Provider.of<CartController>(Get.context!, listen: false).cart?.id,"", inputValueList);
       }
 
@@ -529,7 +514,7 @@ g.Data? governate;
     int allowedGovernorateIds = await getGovernates(context);
 // If you want to format it to a string like "2025-05-23"
     String formattedDate = "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
-    ApiResponse apiResponse = await checkoutServiceInterface.digitalPaymentPlaceOrder( addressId, couponCode, Provider.of<AddressController>(Get.context!, listen: false).selectedDate,allowedGovernorateIds,"${Provider.of<AddressController>(Get.context!, listen: false).shippingCost}",formattedDate,couponAmount,serviceFees.toString() ,billingAddressId,addressId ,orderNote,
+    ApiResponse apiResponse = await checkoutServiceInterface.digitalPaymentPlaceOrder( addressId, couponCode, Provider.of<AddressController>(Get.context!, listen: false).selectedDate,allowedGovernorateIds,"${Provider.of<AddressController>(Get.context!, listen: false).shippingCost}",formattedDate,couponAmount,double.parse((((serviceFees )!/ 100) * (Provider.of<CheckoutController>(context, listen: false).shippingCost ?? 0)).toStringAsFixed(3)).ceil().toString(),billingAddressId,addressId ,orderNote,
         "paid cash on delivery",Provider.of<CartController>(Get.context!, listen: false).cart?.id,"", inputValueList);
 
     if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {

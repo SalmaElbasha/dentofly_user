@@ -187,9 +187,7 @@ print((double.parse((((double.tryParse(widget.orders.first.serviceFee ?? "") ?? 
 
     double shipping = widget.orders.first.shippingCost ?? 0;
     int serviceFee = (
-        ((double.tryParse(widget.orders.first.serviceFee ?? "") ?? 0) / 100) *
-            (widget.orders.first.shippingCost ?? 0)
-    ).floor();
+        (double.tryParse(widget.orders.first.serviceFee ?? "") ?? 0).ceil());
 
     double finalTotal = total + tax + shipping + serviceFee - discount;
 
@@ -259,6 +257,9 @@ print((double.parse((((double.tryParse(widget.orders.first.serviceFee ?? "") ?? 
         const SizedBox(height: 8),
         buildInfoRow(getTranslated('payment_method', context),
             widget.orders[0].paymentNote ?? widget.orders[0].paymentMethod ?? ""),
+        const SizedBox(height: 8),
+        buildInfoRow(getTranslated('payment_status', context),
+            widget.orders[0].paymentStatus ?? widget.orders[0].paymentStatus ?? ""),
         const SizedBox(height: 8),
         buildInfoRow(
           getTranslated('download_invoice', context),

@@ -17,6 +17,7 @@ import 'package:flutter_sixvalley_ecommerce/features/deal/controllers/flash_deal
 import 'package:flutter_sixvalley_ecommerce/features/location/controllers/location_controller.dart';
 import 'package:flutter_sixvalley_ecommerce/features/loyaltyPoint/controllers/loyalty_point_controller.dart';
 import 'package:flutter_sixvalley_ecommerce/features/notification/controllers/notification_controller.dart';
+import 'package:flutter_sixvalley_ecommerce/features/notification/screens/notification_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/features/onboarding/controllers/onboarding_controller.dart';
 import 'package:flutter_sixvalley_ecommerce/features/order/controllers/order_controller.dart';
 import 'package:flutter_sixvalley_ecommerce/features/order_details/controllers/order_details_controller.dart';
@@ -57,30 +58,33 @@ import 'localization/app_localization.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-
 final database = AppDatabase();
 
 Future<void> main() async {
   HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
 
-
-if(Firebase.apps.isEmpty) {
-  if(Platform.isAndroid) {
-    await Firebase.initializeApp(options: const FirebaseOptions(
-      apiKey: 'AIzaSyBPAJz4h9oK1bsIf8cmCdxNd8e-RQRHbLU',
-      appId: '1:115688405848:android:0039229e790aed7704432d',
-      messagingSenderId: '115688405848',
-      projectId: 'valley-f2ea1',
-    ));
-  }else{
-    await Firebase.initializeApp();
+  if (Firebase.apps.isEmpty) {
+    if (Platform.isAndroid) {
+      await Firebase.initializeApp(
+        options: const FirebaseOptions(
+          apiKey: 'AIzaSyBPAJz4h9oK1bsIf8cmCdxNd8e-RQRHbLU',
+          appId: '1:115688405848:android:3514bedbf5bcab5b04432d',
+          messagingSenderId: '115688405848',
+          projectId: 'valley-f2ea1',
+        ),
+      );
+    } else {
+      await Firebase.initializeApp();
+    }
   }
-}
+
   await FlutterDownloader.initialize(debug: true, ignoreSsl: true);
   await di.init();
 
-  flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.requestNotificationsPermission();
+  flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+      ?.requestNotificationsPermission();
 
   NotificationBody? body;
   try {
@@ -89,14 +93,35 @@ if(Firebase.apps.isEmpty) {
       body = NotificationHelper.convertNotification(remoteMessage.data);
     }
     await NotificationHelper.initialize(flutterLocalNotificationsPlugin);
-    // FirebaseMessaging.onBackgroundMessage(myBackgroundMessageHandler);
-  }catch(_) {}
+  } catch (_) {}
+
+  Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+    await Firebase.initializeApp();
+    NotificationHelper.showNotification(
+      message,
+      flutterLocalNotificationsPlugin,
+      false, // App is in background
+    );
+  }
+
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
 
-  // await NotificationHelper.initialize(flutterLocalNotificationsPlugin);
-  // FirebaseMessaging.onBackgroundMessage(myBackgroundMessageHandler);
 
-  runApp(MultiProvider(providers: [
+  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    final data = message.data;
+    final isWeb = data['source'] == 'web';
+    final hasSale = message.notification?.title?.toLowerCase().contains('sale') ?? false;
+
+    if (navigatorKey.currentContext != null && (isWeb || hasSale)) {
+      Navigator.of(navigatorKey.currentContext!).push(
+        MaterialPageRoute(builder: (_) => const NotificationScreen()),
+      );
+    }
+  });
+
+  runApp(MultiProvider(
+    providers: [
       ChangeNotifierProvider(create: (context) => di.sl<CategoryController>()),
       ChangeNotifierProvider(create: (context) => di.sl<ShopController>()),
       ChangeNotifierProvider(create: (context) => di.sl<FlashDealController>()),
@@ -144,39 +169,41 @@ class MyApp extends StatelessWidget {
   final NotificationBody? body;
   const MyApp({super.key, required this.body});
 
-
   @override
   Widget build(BuildContext context) {
     List<Locale> locals = [];
     for (var language in AppConstants.languages) {
       locals.add(Locale(language.languageCode!, language.countryCode));
     }
-    return Consumer<ThemeController>(
-      builder: (context, themeController, _) {
-        return MaterialApp(
-          title: AppConstants.appName,
-          navigatorKey: navigatorKey,
-          debugShowCheckedModeBanner: false,
-          theme: themeController.darkTheme ? dark : light(
-            primaryColor: themeController.selectedPrimaryColor,
-            secondaryColor: themeController.selectedPrimaryColor,
-          ),
-          locale: Provider.of<LocalizationController>(context).locale,
-          localizationsDelegates: [
-            AppLocalization.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-            FallbackLocalizationDelegate()
-          ],
-          builder:(context,child){
-            return MediaQuery(data: MediaQuery.of(context).copyWith(textScaler: TextScaler.noScaling), child: child!);
-          },
-          supportedLocales: locals,
-          home: SplashScreen(body: body,),
-        );
-      }
-    );
+    return Consumer<ThemeController>(builder: (context, themeController, _) {
+      return MaterialApp(
+        title: AppConstants.appName,
+        navigatorKey: navigatorKey,
+        debugShowCheckedModeBanner: false,
+        theme: themeController.darkTheme
+            ? dark
+            : light(
+          primaryColor: themeController.selectedPrimaryColor,
+          secondaryColor: themeController.selectedPrimaryColor,
+        ),
+        locale: Provider.of<LocalizationController>(context).locale,
+        localizationsDelegates: [
+          AppLocalization.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          FallbackLocalizationDelegate()
+        ],
+        builder: (context, child) {
+          return MediaQuery(
+            data: MediaQuery.of(context).copyWith(textScaler: TextScaler.noScaling),
+            child: child!,
+          );
+        },
+        supportedLocales: locals,
+        home: SplashScreen(body: body),
+      );
+    });
   }
 }
 
@@ -184,9 +211,11 @@ class Get {
   static BuildContext? get context => navigatorKey.currentContext;
   static NavigatorState? get navigator => navigatorKey.currentState;
 }
+
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
   }
 }

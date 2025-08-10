@@ -116,7 +116,7 @@ class CheckoutScreenState extends State<CheckoutScreen> {
     Provider.of<CheckoutController>(context, listen: false).resetPaymentMethod();
     Provider.of<CheckoutController>(context, listen: false).getSeviceFees();
     Provider.of<ShippingController>(context, listen: false).getChosenShippingMethod(context);
-    widget.serviceFees=Provider.of<CheckoutController>(context, listen: false).serviceFees;
+    widget.serviceFees=double.parse((((Provider.of<CheckoutController>(context, listen: false).serviceFees??1)/ 100) * (Provider.of<CheckoutController>(context, listen: false).shippingCost ?? 0)).toStringAsFixed(0)).ceilToDouble();
     if (Provider.of<SplashController>(context, listen: false).configModel != null &&
         Provider.of<SplashController>(context, listen: false).configModel!.offlinePayment != null) {
       Provider.of<CheckoutController>(context, listen: false).getOfflinePaymentList();
@@ -263,7 +263,7 @@ class CheckoutScreenState extends State<CheckoutScreen> {
                                               (Provider.of<CheckoutController>(context, listen: false).shippingCost ?? 0) -
                                               (widget.discount ?? 0) -
                                               (_couponDiscount ?? 0) +
-                                              double.parse((((Provider.of<CheckoutController>(context, listen: false).serviceFees )! / 100) * (Provider.of<CheckoutController>(context, listen: false).shippingCost ?? 0)).toStringAsFixed(3))+(widget.tax??0), callback: _callback)));
+                                              double.parse((((Provider.of<CheckoutController>(context, listen: false).serviceFees )!/ 100) * (Provider.of<CheckoutController>(context, listen: false).shippingCost ?? 0)).toStringAsFixed(0))+(widget.tax??0), callback: _callback)));
                                     }
 
                                     else if(orderProvider.walletChecked){
@@ -466,9 +466,7 @@ class CheckoutScreenState extends State<CheckoutScreen> {
                                       title: getTranslated('service_fee', context),
                                       amount: PriceConverter.convertPrice(
                                           context,
-                                          double.parse(
-                                              ((checkoutController.serviceFees! / 100) * (checkoutController.shippingCost ?? 0)).toStringAsFixed(0)
-                                          )
+                                          double.parse((((Provider.of<CheckoutController>(context, listen: false).serviceFees )!/ 100) * (Provider.of<CheckoutController>(context, listen: false).shippingCost ?? 0)).toStringAsFixed(3)).ceilToDouble()
                                       ),
                                     ),
 
@@ -481,9 +479,7 @@ class CheckoutScreenState extends State<CheckoutScreen> {
                                             (checkoutController.shippingCost ?? 0) -
                                             (widget.discount ?? 0) -
                                             (_couponDiscount ?? 0) +
-                                            double.parse(
-                                                ((checkoutController.serviceFees! / 100) * (checkoutController.shippingCost ?? 0)).toStringAsFixed(0)
-                                            )+(widget.tax??0),
+                                            double.parse((((Provider.of<CheckoutController>(context, listen: false).serviceFees )!/ 100) * (Provider.of<CheckoutController>(context, listen: false).shippingCost ?? 0)).toStringAsFixed(0)).ceilToDouble()+(widget.tax??0),
                                       ),
                                     ),
                                   ]);
